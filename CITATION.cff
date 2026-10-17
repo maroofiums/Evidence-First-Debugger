@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this project, please cite it as below."
+title: "Evidence-First Debugger"
+type: software
+authors:
+  - name: "Maroof"
+version: 0.3.0
+license: MIT
+repository-code: "https://github.com/maroofiums/Evidence-First-Debugger"
+abstract: >-
+  A Claude skill and portable agent instructions that make AI coding
+  assistants debug using evidence, ranked hypotheses, minimal fixes,
+  regression tests, and honest verification status.
+keywords:
+  - debugging
+  - claude-skills
+  - ai-agents
+  - agents-md
+  - root-cause-analysis

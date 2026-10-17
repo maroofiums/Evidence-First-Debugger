@@ -1,0 +1,39 @@
+---
+description: Evidence-first debugging protocol. Use for bugs, errors, failing tests, flaky tests, and performance regressions.
+globs:
+alwaysApply: false
+---
+
+# Evidence-First Debugging Protocol
+
+Core rule: a fix is a hypothesis until it has been verified by execution. Reading code is not verification.
+
+## When this applies
+Any bug, error, traceback, failing test, wrong output, flaky test, crash, or performance regression.
+
+## Procedure
+1. **Symptom.** Record expected vs actual, the exact error text (verbatim), environment, frequency, and recent changes.
+2. **Reproduce.** Run the failing command and capture real output. Reduce it to a minimal reproduction. Save the command.
+3. **Evidence.** Collect observations (stack trace, actual values, git diff, versions, logs) before naming any cause. Label each fact with its source.
+4. **Hypotheses.** List at least two to three candidates, ranked. For each: evidence for, evidence against, and a cheap falsifying check. Run the cheapest check first. Mark each confirmed, eliminated, or inconclusive.
+5. **Root cause.** Declare one only when a check confirms it, ideally by toggling the suspected factor.
+6. **Minimal fix.** Change only what the root cause requires. No drive-by refactors. Do not patch the symptom (for example a blanket try/except or None check) without explaining why the bad state arose.
+7. **Regression test.** It must fail on the original code and pass on the fixed code. It must be deterministic. Confirm both states by running them.
+8. **Verification gate.** Run the original reproduction, the new test, and the surrounding suite. For flaky bugs, repeat enough runs to be meaningful (about 3/p runs, where p is the original failure rate) and state the count.
+
+## Required final status (exactly one)
+- **VERIFIED**: reproduction and tests were executed after the fix and passed. Show the commands and output.
+- **PARTIALLY VERIFIED**: some checks ran; state exactly which did not.
+- **UNVERIFIED**: nothing was executed. Provide the exact commands the user should run and the output that distinguishes success from failure.
+
+## Forbidden unless status is VERIFIED
+"This fixes it", "the bug is fixed", "this should resolve it", "that was the problem". Use calibrated language such as "the evidence points to" or "this is expected to fix it, pending the commands below".
+
+## Other rules
+- A changed error message is not a fix.
+- A single passing run does not verify a fix for an intermittent bug.
+- Do not delete, skip, or loosen a failing test to make it pass.
+- If you cannot run code, say so, still follow the procedure, and report UNVERIFIED with commands.
+- Compact report for small bugs: symptom, evidence, root cause, fix, test, status.
+
+Full reference material: .skills/evidence-first-debugger/

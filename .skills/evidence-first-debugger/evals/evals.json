@@ -1,0 +1,77 @@
+{
+  "skill_name": "evidence-first-debugger",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "My FastAPI endpoint POST /orders/refund returns 500 for some clients. Traceback: KeyError: 'user_id' at services/orders.py line 42. The handler does user_id = payload['user_id']. Can you fix it?",
+      "expected_output": "Evidence is listed before any cause; at least two ranked hypotheses with falsifying checks; a minimal fix; a regression test; and an honest status of UNVERIFIED because no code was run.",
+      "expectations": [
+        "Lists the observed evidence (the KeyError and location) before proposing a cause",
+        "Presents at least two ranked hypotheses, each with a falsifying check",
+        "Proposes a minimal change rather than a broad refactor",
+        "Includes a regression test that encodes the failing trigger",
+        "States the verification status as UNVERIFIED or PARTIALLY VERIFIED and does not say the bug is fixed",
+        "Provides exact commands the user should run to verify"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "I changed the code like you said and now the error message is different, so it's fixed right?",
+      "expected_output": "Declines to confirm; explains that a changed error is not a fix; asks for the reproduction output and the new error.",
+      "expectations": [
+        "Does not declare the bug fixed",
+        "States that a changed error message is not evidence of a fix",
+        "Asks for or runs the original reproduction command and the new error output",
+        "Treats the new error as new evidence to analyze"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "This pytest test fails about one run in ten in CI but passes locally. I added a time.sleep(1) and now it passes. Done?",
+      "expected_output": "Treats sleep as masking a likely race; asks for failure rate evidence; proposes deterministic synchronization; requires many repeated runs before VERIFIED.",
+      "expectations": [
+        "Identifies that a passing run with added sleep does not verify the fix",
+        "Proposes measuring failure rate over repeated runs",
+        "Suggests replacing sleep with explicit synchronization or a condition wait",
+        "Specifies a number of repeat runs required for verification",
+        "Does not claim the flakiness is resolved"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "My PyTorch classifier's loss turns into NaN around step 400. LR is 3e-4. Here is my loss: loss = -(y * torch.log(torch.softmax(logits, -1))).sum(-1).mean()",
+      "expected_output": "Ranks hypotheses including log(0) from manual softmax; suggests anomaly detection or overfit-one-batch checks; proposes log_softmax or cross_entropy; includes a finite-loss test on extreme logits.",
+      "expectations": [
+        "Ranks at least two hypotheses including numerical instability of log of softmax",
+        "Suggests a falsifying check such as set_detect_anomaly or inspecting minimum probabilities",
+        "Proposes using log_softmax or cross_entropy",
+        "Includes a regression test with extreme logits asserting a finite loss",
+        "Marks the result UNVERIFIED unless it was executed"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Review this proposed fix and tell me whether it has actually been verified: 'I added a None check in get_user() and the tests pass.' No test output, no reproduction, and no explanation of why None appeared.",
+      "expected_output": "Concludes the fix is not verified; identifies symptom-patching, missing reproduction, missing regression test, and missing root cause.",
+      "expectations": [
+        "Concludes the fix is not verified",
+        "Identifies that a None check may treat the symptom without explaining why None appeared",
+        "Notes there is no evidence the original reproduction was rerun",
+        "Notes there is no regression test that fails before the fix",
+        "Lists what evidence would be needed to reach VERIFIED"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Our Django list endpoint got slow after last week's release. It was fast before. Fix it.",
+      "expected_output": "Asks for or establishes measurements first; proposes profiling and query counting; ranks hypotheses such as N+1 queries and missing index; requires before/after measurements.",
+      "expectations": [
+        "Requires or proposes quantifying the slowdown before hypothesizing",
+        "Suggests profiling or query counting instead of guessing",
+        "Ranks hypotheses including N+1 queries or missing index with falsifying checks",
+        "Suggests using version control to compare the release",
+        "Requires before and after measurements before claiming improvement"
+      ]
+    }
+  ]
+}
