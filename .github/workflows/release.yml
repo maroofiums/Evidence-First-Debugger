@@ -21,7 +21,7 @@ jobs:
       - name: Build skill package
         run: ./scripts/build_skill.sh
       - name: Publish release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           files: dist/evidence-first-debugger.skill
           generate_release_notes: true
