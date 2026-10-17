@@ -15,7 +15,7 @@ Thank you for considering a contribution.
 2. Preserve the core rule: no success claim without execution.
 3. Keep the verification vocabulary (`VERIFIED`, `PARTIALLY VERIFIED`, `UNVERIFIED`) unchanged.
 4. Use formal, precise language. Avoid emojis.
-5. Run `python scripts/validate_skill.py` before opening a pull request.
+5. Run `python scripts/validate_skill.py` before opening a pull request. If you edit a Mermaid diagram, also run `cd scripts && npm install && node check_mermaid.mjs ../README.md`.
 6. Every new reference file must be linked from `SKILL.md` and from the README.
 7. New examples should follow the report template in `references/06-report-template.md`.
 

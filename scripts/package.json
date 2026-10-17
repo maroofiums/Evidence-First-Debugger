@@ -1,0 +1,10 @@
+{
+  "name": "evidence-first-debugger-tools",
+  "private": true,
+  "type": "module",
+  "description": "Development tooling: validates Mermaid diagrams in markdown files.",
+  "devDependencies": {
+    "jsdom": "^26.0.0",
+    "mermaid": "^11.0.0"
+  }
+}

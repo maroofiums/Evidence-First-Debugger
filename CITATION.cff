@@ -4,7 +4,7 @@ title: "Evidence-First Debugger"
 type: software
 authors:
   - name: "Maroof"
-version: 0.3.0
+version: 0.4.0
 license: MIT
 repository-code: "https://github.com/maroofiums/Evidence-First-Debugger"
 abstract: >-

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.0
+
+- Rewrote the README as an interactive guide: Mermaid diagrams (workflow, debugging session, hypothesis lifecycle, status decision tree, reference picker, mind map), collapsible install and FAQ sections, and a why, what, how structure
+- Added a runnable "try it" exercise with a deliberate bug and a scoring checklist
+- Added Mermaid validation script and CI job so diagram syntax errors are caught before they break rendering on GitHub
+
 ## 0.3.0
 
 - Added portable instructions: `AGENTS.md`, `CLAUDE.md`, a Cursor rule, and GitHub Copilot instructions

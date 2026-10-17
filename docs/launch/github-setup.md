@@ -23,5 +23,5 @@ software-engineering  root-cause-analysis  pytest  python
 - [ ] Add issue labels: `bug`, `enhancement`, `new-language-reference`, `good first issue`, `help wanted`
 - [ ] Create three `good first issue` tickets, for example: add a Node.js diagnostics reference, add a Go diagnostics reference, add a Rust diagnostics reference
 - [ ] Pin the repository on your GitHub profile
-- [ ] Publish release `v0.3.0` with the `.skill` file attached
+- [ ] Publish release `v0.4.0` with the `.skill` file attached
 - [ ] Add a `CITATION.cff` if you want academic citation (optional)
