@@ -18,3 +18,12 @@ dist/
 
 node_modules/
 package-lock.json
+
+# Project-specific
+.DS_Store
+Thumbs.db
+dist/
+*.skill
+*.zip
+node_modules/
+package-lock.json
